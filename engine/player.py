@@ -17,6 +17,7 @@ class Player(pygame.sprite.Sprite):
     def input(self):
         keys = pygame.key.get_pressed()
 
+        #  movement input
         if keys[pygame.K_UP]:
             self.direction.y = -1
         elif keys[pygame.K_DOWN]:
@@ -30,6 +31,14 @@ class Player(pygame.sprite.Sprite):
             self.direction.x = -1
         else:
             self.direction.x = 0
+
+        #  attack input
+        if keys[pygame.K_SPACE]:
+            print('attack')
+
+        #  magic input
+        if keys[pygame.K_LCTRL]:
+            print('magic')
 
     def move(self, speed):
         if self.direction.magnitude() != 0:
