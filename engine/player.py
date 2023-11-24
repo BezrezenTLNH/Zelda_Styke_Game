@@ -26,7 +26,7 @@ class Player(pygame.sprite.Sprite):
         self.obstacle_sprites = obstacle_sprites
 
     def import_player_assets(self):
-        character_path = '../graphics/player'
+        character_path = '../graphics/player/'
         self.animations = {
             'up': [], 'down': [], 'left': [], 'right': [],
 			'right_idle':[], 'left_idle':[], 'up_idle':[], 'down_idle':[],
