@@ -24,7 +24,7 @@ class UI:
         self.magic_graphics = []
         for magic in magic_data.values():
             magic = pygame.image.load(magic['graphic']).convert_alpha()
-            self.weapon_graphics.append(magic)
+            self.magic_graphics.append(magic)
 
     def show_bar(self, current, max_amoumt, bg_rect, color):
         #  draw bg
@@ -79,4 +79,4 @@ class UI:
 
         self.show_exp(player.exp)
         self.weapon_overlay(player.weapon_index, not player.can_switch_weapon)  # weapon box
-        self.weapon_overlay(player.magic_index, not player.can_switch_magic)  # magic box
+        self.magic_overlay(player.magic_index, not player.can_switch_magic)  # magic box
