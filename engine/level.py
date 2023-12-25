@@ -101,11 +101,13 @@ class Level:
     def player_attack_logic(self):
         if self.attack_sprites:
             for attack_sprite in self.attack_sprites:
-                collision_sprtes = pygame.sprite.spritecollide(attack_sprite, self.attackable_sprites, True)
+                collision_sprtes = pygame.sprite.spritecollide(attack_sprite, self.attackable_sprites, False)
                 if collision_sprtes:
                     for tagret_sprite in collision_sprtes:
                         if tagret_sprite.sprite_type == 'grass':
                             tagret_sprite.kill()
+                        else:
+                            tagret_sprite.get_damage(self.player, attack_sprite.sprite_type)
 
     def run(self):
         # update and draw the game
