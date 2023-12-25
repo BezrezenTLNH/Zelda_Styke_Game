@@ -86,6 +86,17 @@ class Enemy(Entity):
         self.image = animation[int(self.frame_index)]
         self.rect = self.image.get_rect(center=self.hitbox.center)
 
+    def get_damage(self, player, attack_type):
+        if attack_type == 'weapon':
+            self.health -= player.get_full_weapon_damage()
+        else:
+            pass
+        #  magic damage
+
+    def check_death(self):
+        if self.health <= 0:
+            self.kill()
+
     def cooldown(self):
         if not self.can_attack:
             current_time = pygame.time.get_ticks()
@@ -96,6 +107,7 @@ class Enemy(Entity):
         self.move(self.speed)
         self.animate()
         self.cooldown()
+        self.check_death()
 
     def enemy_update(self, player):
         self.get_status(player)
