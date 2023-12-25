@@ -91,6 +91,12 @@ class Enemy(Entity):
         self.image = animation[int(self.frame_index)]
         self.rect = self.image.get_rect(center=self.hitbox.center)
 
+        if not self.vulnerable:
+            alpha = self.wave_value()
+            self.image.set_alpha(alpha)
+        else:
+            self.image.set_alpha(255)
+
     def get_damage(self, player, attack_type):
         if self.vulnerable:
             self.direction = self.get_player_distance_direction(player)[1]
