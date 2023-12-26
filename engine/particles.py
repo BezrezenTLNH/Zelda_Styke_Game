@@ -53,6 +53,10 @@ class AnimationPlayer:
         animation_frames = choice(self.frames['leaf'])
         ParticleEffects(pos, animation_frames, groups)
 
+    def create_particles(self, animation_type, pos, groups):
+        animation_frames = self.frames[animation_type]
+        ParticleEffects(pos, animation_frames, groups)
+
 class ParticleEffects(pygame.sprite.Sprite):
     def __init__(self, pos, animation_frames, groups):
         super().__init__(groups)
