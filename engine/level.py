@@ -1,4 +1,4 @@
-from random import choice
+from random import choice, randint
 
 import pygame.sprite
 
@@ -9,6 +9,7 @@ from settings import *
 from support import *
 from tile import Tile
 from weapon import Weapon
+from particles import AnimationPlayer
 
 
 class Level:
@@ -30,6 +31,9 @@ class Level:
 
         #  user interface
         self.ui = UI()
+
+        #  particles
+        self.animation_player = AnimationPlayer()
 
     def create_map(self):
         layouts = {
@@ -103,11 +107,14 @@ class Level:
             for attack_sprite in self.attack_sprites:
                 collision_sprtes = pygame.sprite.spritecollide(attack_sprite, self.attackable_sprites, False)
                 if collision_sprtes:
-                    for tagret_sprite in collision_sprtes:
-                        if tagret_sprite.sprite_type == 'grass':
-                            tagret_sprite.kill()
+                    for target_sprite in collision_sprtes:
+                        if target_sprite.sprite_type == 'grass':
+                            pos = target_sprite.rect.center
+                            for leaf in range(randint(3, 6)):
+                                self.animation_player.create_grass_particles(pos, self.visible_sprites)
+                            target_sprite.kill()
                         else:
-                            tagret_sprite.get_damage(self.player, attack_sprite.sprite_type)
+                            target_sprite.get_damage(self.player, attack_sprite.sprite_type)
 
     def damage_player(self, amount, attack_type):
         if self.player.vulnerable:
