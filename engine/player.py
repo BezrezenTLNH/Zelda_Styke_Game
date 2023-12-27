@@ -1,7 +1,8 @@
 import pygame
+
+from entity import Entity
 from settings import *
 from support import import_folder
-from entity import Entity
 
 
 class Player(Entity):
@@ -57,8 +58,8 @@ class Player(Entity):
         character_path = '../graphics/player/'
         self.animations = {
             'up': [], 'down': [], 'left': [], 'right': [],
-			'right_idle':[], 'left_idle':[], 'up_idle':[], 'down_idle':[],
-			'right_attack':[], 'left_attack':[], 'up_attack':[], 'down_attack':[]
+            'right_idle': [], 'left_idle': [], 'up_idle': [], 'down_idle': [],
+            'right_attack': [], 'left_attack': [], 'up_attack': [], 'down_attack': []
         }
 
         for animation in self.animations.keys():
@@ -186,11 +187,21 @@ class Player(Entity):
         else:
             self.image.set_alpha(255)
 
-
     def get_full_weapon_damage(self):
         base_damage = self.stats['attack']
         weapon_damage = weapon_data[self.weapon]['damage']
         return base_damage + weapon_damage
+
+    def get_full_magic_damage(self):
+        base_damage = self.stats['magic']
+        spell_damage = magic_data[self.magic]['strength']
+        return base_damage + spell_damage
+
+    def energy_recovered(self):
+        if self.energy < self.stats['energy']:
+            self.energy += 0.01 * self.stats['magic']
+        else:
+            self.energy = self.stats['energy']
 
     def update(self):
         self.input()
@@ -198,3 +209,4 @@ class Player(Entity):
         self.get_status()
         self.animate()
         self.move(self.speed)
+        self.energy_recovered()
