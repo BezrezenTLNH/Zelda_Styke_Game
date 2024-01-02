@@ -22,6 +22,7 @@ TEXT_COLOR = '#EEEEEE'
 HEALTH_COLOR = 'red'
 ENERGY_COLOR = 'blue'
 UI_BORDER_COLOR_ACTIVE = 'gold'
+UPGRADE_BG_COLOR_SELECTED = '#EEEEEE'
 
 #  weapons
 weapon_data = {
